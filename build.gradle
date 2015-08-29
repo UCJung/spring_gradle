@@ -1,0 +1,61 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: "war"
+apply plugin: "eclipse"
+apply plugin: "eclipse-wtp"
+apply plugin: 'jetty'
+
+// def version
+def ver = [
+	java: '1.8',
+	spring: '4.2.0.RELEASE',
+	servletAPI: '3.1.0',
+	commonsCollections: '3.2.1',
+	junit: '4.12',
+	slf4j: '1.7.12'	
+]
+
+// JDK 7
+sourceCompatibility = ${ver.java}
+targetCompatibility = ${ver.java}
+
+eclipse {
+    // 빌드하고나면 프로젝트정보도 같이 지워지는데, Gradle프로젝트임을 인식시켜줍니다.
+    project.natures "org.springsource.ide.eclipse.gradle.core.nature"
+    wtp {
+        facet {
+            facet name: 'jst.web', version: '3.1'
+            facet name: 'jst.java', version: '1.8'
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    // ${ver.~}변수는 위에서 정의한 버전으로 사용됩니다.
+    providedCompile "javax.servlet:javax.servlet-api:${ver.servletAPI}"
+     
+    compile "org.springframework:spring-webmvc:${ver.spring}"
+    compile "org.slf4j:slf4j-api:${ver.slf4j}"
+    compile group: 'commons-collections', name: 'commons-collections', version: "${ver.commonsCollections}"
+
+    testCompile group: 'junit', name: 'junit', version: "${ver.junit}"
+}
+ 
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8' // 인코딩 UTF-8로 통일합니다.
+ 
+test {
+    systemProperties 'property': 'value'
+}
+ 
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
