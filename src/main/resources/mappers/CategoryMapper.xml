@@ -1,0 +1,6 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<mapper namespace="com.spay.mapper.CategoryMapper">
+    <select id="getTotalCount" resulttype="java.lang.Integer">
+        select count(*) cnt from Categories
+    </select>
+</mapper> 
