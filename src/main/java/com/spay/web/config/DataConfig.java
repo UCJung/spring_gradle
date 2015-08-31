@@ -41,17 +41,17 @@ public class DataConfig {
         return dataSource;		
    	}
 	
-	@Bean(destroyMethod="shutdown")
+	@Bean
 	public DataSourceTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
 
-	@Bean(destroyMethod="shutdown")
+	@Bean
 	public SqlSessionFactoryBean sessionFactoryBean() throws IOException {
 		
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mappers/**/*.xml"));
 		
 		return sessionFactory;
 	}

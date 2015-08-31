@@ -6,6 +6,6 @@
   <title>Home</title>
 </head>
 <body>
-<P> ${name}. </P>
+<P> ${name}. ${count}</P>
 </body>
 </html>

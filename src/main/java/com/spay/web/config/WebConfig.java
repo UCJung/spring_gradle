@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.spay.web.controller" })
+@ComponentScan(basePackages = { "com.spay.web" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
@@ -51,21 +51,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     	CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
     	cookieLocaleResolver.setDefaultLocale(StringUtils.parseLocaleString("en"));
     	return cookieLocaleResolver;
-    }
-    
-    /**
-     * View Resover 설정 : /WEB-INF/views/*.jsp를 뷰로 사용
-     * @return
-     */
-    @Bean
-    public ViewResolver viewResolver() {
-    	
-    	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-    	viewResolver.setViewClass(JstlView.class);
-    	viewResolver.setPrefix("/WEB-INF/views/");
-    	viewResolver.setSuffix(".jsp");
-    	
-    	return viewResolver;
     }
     
     /**
