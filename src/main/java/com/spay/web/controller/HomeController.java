@@ -14,13 +14,13 @@ public class HomeController {
 	@Autowired
 	private CategoryMapper category;
 	
-	@RequestMapping(value="/jsp", method=RequestMethod.GET )
+	@RequestMapping(value="/jstl", method=RequestMethod.GET )
 	public String homeJsp(Model model) {
 		String name = "welcom spring mvp";
 		
 		model.addAttribute("count", category.getTotalCount());
 		model.addAttribute("name", name);
-		return "home";
+		return "jstl";
 	}
 	
 	@RequestMapping(value="/freemarker", method=RequestMethod.GET )
@@ -29,6 +29,24 @@ public class HomeController {
 		
 		model.addAttribute("count", category.getTotalCount());
 		model.addAttribute("name", name);
-		return "sample";
+		return "freemarker";
 	}	
+	
+	@RequestMapping(value="/tiles", method=RequestMethod.GET )
+	public String homeTiles(Model model) {
+		String name = "welcom spring mvp";
+		
+		model.addAttribute("count", category.getTotalCount());
+		model.addAttribute("name", name);
+		return "tiles";
+	}
+	
+	@RequestMapping(value="/tiles/test", method=RequestMethod.GET )
+	public String homeTilesTest(Model model) {
+		String name = "welcom spring mvp";
+		
+		model.addAttribute("count", category.getTotalCount());
+		model.addAttribute("name", name);
+		return "tiles/test";
+	}			
 }

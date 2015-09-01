@@ -64,8 +64,11 @@ dependencies {
 	compile	"org.codehaus.jackson:jackson-core-asl:1.9.8", 
 			"org.codehaus.jackson:jackson-mapper-asl:1.9.8"
 	compile	"hsqldb:hsqldb:1.8.0.10"
-	compile "org.freemarker:freemarker:2.3.20"
-	
+	compile "org.freemarker:freemarker:2.3.20",
+			"org.apache.tiles:tiles-core:3.0.5",
+			"org.apache.tiles:tiles-servlet:3.0.5",
+			"org.apache.tiles:tiles-jsp:3.0.5"
+
 	providedCompile "javax.servlet:javax.servlet-api:3.0.1"
 	
     testCompile "org.springframework:spring-test:$springVersion"

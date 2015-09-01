@@ -29,8 +29,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        
-    }
+        registry.addResourceHandler("/css/*").addResourceLocations("/WEB-INF/css/*");
+        registry.addResourceHandler("/js/*").addResourceLocations("/WEB-INF/js/*");
+        registry.addResourceHandler("/img/*").addResourceLocations("/WEB-INF/img/*");        
+   }
     
     /**
      * 인터셉터 설정 
