@@ -11,22 +11,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Member implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 6505725258389129194L;
-	private String name;
+	private String username;
 	private String password;
 	
 	public Member() { }
 	public Member(String name, String password) { 
-		this.setName(name);
+		this.setUsername(name);
 		this.setPassword(password);
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	
 	public void setPassword(String password) {
 		this.password = password;
@@ -44,7 +38,7 @@ public class Member implements UserDetails, Serializable {
 
 	@Override
 	public String getUsername() {
-		return this.name;
+		return this.username;
 	}
 
 	@Override
@@ -65,6 +59,9 @@ public class Member implements UserDetails, Serializable {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

@@ -4,9 +4,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -17,7 +20,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.spay" })
+@Import({ SpringSecutiryConfig.class })
+@ComponentScan(basePackageClasses = AppConfig.class)
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
@@ -29,7 +33,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/css/*").addResourceLocations("/WEB-INF/css/*");
         registry.addResourceHandler("/js/*").addResourceLocations("/WEB-INF/js/*");
         registry.addResourceHandler("/img/*").addResourceLocations("/WEB-INF/img/*");        
-   }
+    }
+    
+    @Override
+    public void configureDefaultServletHandling(
+    		DefaultServletHandlerConfigurer configurer) {
+    	configurer.enable();
+    }
+    
+    @Override
+    public void configureContentNegotiation(
+    		ContentNegotiationConfigurer configurer) {
+    }
     
     /**
      * 인터셉터 설정 

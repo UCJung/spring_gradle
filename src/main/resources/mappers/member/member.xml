@@ -3,8 +3,7 @@
 <mapper namespace="com.spay.member.dao.MemberDAO">
     
     <select id="selectMemberByName" parameterType="String" resultType="com.spay.member.model.Member">
-        SELECT /* com.spay.member.dao.MemberDAO.selectAdminByName */
-         * 
+        SELECT * 
         FROM users
         WHERE username = #{name}
     </select>

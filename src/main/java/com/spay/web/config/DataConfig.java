@@ -1,14 +1,18 @@
 package com.spay.web.config;
 
 import java.io.IOException;
+
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -19,8 +23,10 @@ import com.zaxxer.hikari.HikariDataSource;
  *
  */
 @Configuration
+@EnableTransactionManagement
 @MapperScan("com.spay")
 public class DataConfig {
+		
 	/**
 	 * DataSource Configuration for HikariCP
 	 * @return
@@ -55,4 +61,9 @@ public class DataConfig {
 		
 		return sessionFactory;
 	}
+	
+	@Bean
+	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}	
 }

@@ -9,11 +9,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
-import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 /**
  * set ViewResolver Config
@@ -23,6 +20,27 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
 public class ViewResolverConfig {
+
+	/**
+	 * Tiles View Resolver Config : /WEB-INF/views/tiles/*.jsp
+	 */
+
+	@Bean
+	public TilesConfigurer tilesConfigurer() {
+		  TilesConfigurer tilesConfigurer = new TilesConfigurer();
+		  tilesConfigurer.setCheckRefresh(true);
+		  tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/**/tiles.xml"});
+
+		  return tilesConfigurer;
+	}	
+	
+	@Bean
+	public UrlBasedViewResolver viewResolverForURL() {
+		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+		viewResolver.setViewClass(TilesView.class);
+		viewResolver.setOrder(1);
+		return viewResolver;
+	}	
 	
     /**
      * Jstl View Resolver Config : /WEB-INF/views/*.jsp
@@ -31,72 +49,20 @@ public class ViewResolverConfig {
     @Bean
     public ViewResolver viewResolver() {
     	
-    	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-    	viewResolver.setOrder(3);
-    	viewResolver.setViewClass(JstlView.class);
-    	viewResolver.setPrefix("/WEB-INF/views/");
-    	viewResolver.setSuffix(".jsp");
+    	InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+    	resolver.setOrder(2);
+    	resolver.setViewClass(JstlView.class);
+    	resolver.setPrefix("/WEB-INF/views/");
+    	resolver.setSuffix(".jsp");
     	
-    	return viewResolver;
+    	return resolver;
     }
-	
-    /**
-	 * FreeMarker View Resolver Config : /WEB-INF/views/*.ftl
-	 * @return
-	 */
-	@Bean
-	public FreeMarkerConfigurer freeMarkerConfigurer() {
-		
-		FreeMarkerConfigurer fmc = new FreeMarkerConfigurer();
-		fmc.setTemplateLoaderPath("/WEB-INF/views/freemarker");
-		fmc.setDefaultEncoding("utf-8");
-
-		return fmc;
-	}
 	
 	@Bean(name=DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME)
 	public MultipartResolver multipartResolver() {
-		return new CommonsMultipartResolver();
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setMaxInMemorySize(100000000);
+		resolver.setMaxUploadSize(200000000);		
+		return resolver;
 	}
-	
-	@Bean
-	public FreeMarkerViewResolver viewResolverForFreeMarker() {
-		FreeMarkerViewResolver fmvr = new FreeMarkerViewResolver();
-		fmvr.setOrder(1);
-		fmvr.setContentType("text/html; charset=utf-8");
-		fmvr.setCache(true);
-		fmvr.setPrefix("/WEB-INF/views/freemarker/");
-		fmvr.setSuffix(".jsp");
-		fmvr.setRequestContextAttribute("rc");
-		
-		return fmvr;
-	}    
-    
-	/**
-	 * Tiles View Resolver Config : /WEB-INF/views/tiles/*.jsp
-	 */
-	
-	@Bean
-	public UrlBasedViewResolver viewResolverForURL() {
-		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
-		viewResolver.setViewClass(TilesView.class);
-		return viewResolver;
-	}	
-	
-	@Bean
-	public TilesConfigurer tilesConfigurer() {
-		  TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		  tilesConfigurer.setCheckRefresh(true);
-		  tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/**/tiles.xml"});
-
-		  return tilesConfigurer;
-	}
-	
-	@Bean
-	public TilesViewResolver getTilesViewResolver() {
-		TilesViewResolver tilesViewResolver = new TilesViewResolver();
-		tilesViewResolver.setOrder(0);
-		tilesViewResolver.setViewClass(TilesView.class);
-		return tilesViewResolver;
-	}	
 }
