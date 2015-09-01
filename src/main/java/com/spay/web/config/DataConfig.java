@@ -19,7 +19,7 @@ import com.zaxxer.hikari.HikariDataSource;
  *
  */
 @Configuration
-@MapperScan("com.spay.mapper")
+@MapperScan("com.spay")
 public class DataConfig {
 	/**
 	 * DataSource Configuration for HikariCP

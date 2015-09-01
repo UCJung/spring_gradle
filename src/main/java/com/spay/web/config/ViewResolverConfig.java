@@ -34,7 +34,7 @@ public class ViewResolverConfig {
     	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
     	viewResolver.setOrder(3);
     	viewResolver.setViewClass(JstlView.class);
-    	viewResolver.setPrefix("/WEB-INF/views/jstl/");
+    	viewResolver.setPrefix("/WEB-INF/views/");
     	viewResolver.setSuffix(".jsp");
     	
     	return viewResolver;

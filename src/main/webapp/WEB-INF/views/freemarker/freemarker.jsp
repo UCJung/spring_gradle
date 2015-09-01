@@ -1,4 +1,3 @@
-<#ftl encoding="utf-8"/>
 <html>
 <head>
 </head>
