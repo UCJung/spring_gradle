@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -42,8 +43,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
     
     @Override
-    public void configureContentNegotiation(
-    		ContentNegotiationConfigurer configurer) {
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer
+        	.favorPathExtension(true)
+        	.useJaf(false)
+        	.ignoreAcceptHeader(false)
+        	.mediaType("html", MediaType.TEXT_HTML)
+        	.mediaType("json", MediaType.APPLICATION_JSON)
+        	.mediaType("jsonp", MediaType.APPLICATION_JSON)
+        	.mediaType("xml", MediaType.APPLICATION_XML)
+        	.defaultContentType(MediaType.APPLICATION_JSON);
     }
     
     /**

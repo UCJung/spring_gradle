@@ -20,8 +20,6 @@ public class Member implements UserDetails, Serializable {
 		this.setPassword(password);
 	}
 	
-
-	
 	public void setPassword(String password) {
 		this.password = password;
 	}	
@@ -40,6 +38,10 @@ public class Member implements UserDetails, Serializable {
 	public String getUsername() {
 		return this.username;
 	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}	
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -60,8 +62,6 @@ public class Member implements UserDetails, Serializable {
 	public boolean isEnabled() {
 		return true;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+
 
 }

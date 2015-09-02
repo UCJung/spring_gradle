@@ -1,7 +1,6 @@
 package com.spay.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,7 @@ public class HomeController {
 		return "freemarker";
 	}	
 	
-	@RequestMapping(value="/tiles", method=RequestMethod.GET )
+	@RequestMapping(value={ "/tiles", "/tiles.json" }, method=RequestMethod.GET )
 	public String homeTiles(Model model) {
 		String name = "welcom spring mvp";
 		
