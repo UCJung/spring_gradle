@@ -2,6 +2,8 @@ package com.spay.member.bo;
 
 import java.util.HashMap;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +19,8 @@ import com.spay.utils.enums.DatePatternEnum;
 @Component
 public class MemberBO implements UserDetailsService {
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
     @Autowired
     MemberDAO memberDAO;	
     
@@ -29,7 +33,8 @@ public class MemberBO implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return null;
+		Member member = memberDAO.selectMemberByName(username);
+        return member;
 	}
 	
     public UserDetails getMemberByName(String name) {

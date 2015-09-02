@@ -2,6 +2,8 @@ package com.spay.member.bo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,10 @@ public class MemberBOTest {
 	
 	@Test
 	public void test2() {
-		UserDetails member2 = memberBO.getMemberByName("mkyong");
-		logger.info(member2.getUsername());
+		UserDetails member = memberBO.getMemberByName("mkyong");
+		assertThat(member.getUsername(),is("mkyong"));
 		
-		System.out.println(member2.getUsername());
+		logger.info(member.getUsername());
 	}	
 
 }

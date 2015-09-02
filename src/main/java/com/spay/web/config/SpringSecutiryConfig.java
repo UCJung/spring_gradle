@@ -2,31 +2,35 @@ package com.spay.web.config;
 
 import org.jasypt.springsecurity3.authentication.encoding.PasswordEncoder;
 import org.jasypt.util.password.StrongPasswordEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.spay.member.bo.MemberBO;
-
 @Configuration
 @EnableWebSecurity
 public class SpringSecutiryConfig extends WebSecurityConfigurerAdapter {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private MemberBO memberBO;
-	
 	private static final String ADMIN_ROLE = "ADMIN";
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(memberBO)
-			.passwordEncoder(passwordEncoder());
+		auth.authenticationProvider(authenticationProvider());
 	}	
+	
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        SpayAuthenticationProvider authenticationProvider = new SpayAuthenticationProvider();
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }	
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -45,9 +49,14 @@ public class SpringSecutiryConfig extends WebSecurityConfigurerAdapter {
             .defaultSuccessUrl("/")
             .failureUrl("/login?error=loginFailed")
         .and()
+        .logout()
+        	.logoutUrl("/j_spring_security_logout")
+        	.logoutSuccessUrl("/")
+        .and()
         .authorizeRequests()
             .antMatchers("/admin**").hasRole(ADMIN_ROLE)
             .antMatchers("/dba**").authenticated();
+        
 	}
 
     @Bean
