@@ -39,7 +39,8 @@ public class CommonMappingJackson2JsonView extends MappingJackson2JsonView {
     private static Logger logger = LoggerFactory.getLogger(CommonMappingJackson2JsonView.class);
 
     private boolean updateContentLength;
-    private String jsonPrefix;
+    @SuppressWarnings("unused")
+	private String jsonPrefix;
 
     @Override
     public void setUpdateContentLength(boolean updateContentLength) {

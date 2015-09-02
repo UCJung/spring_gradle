@@ -51,7 +51,8 @@ public class SpayAuthenticationProvider extends DaoAuthenticationProvider {
 
         validation(user, authentication);
 
-        List<GrantedAuthority> grantedAuths = (List<GrantedAuthority>)user.getAuthorities();
+        @SuppressWarnings("unchecked")
+		List<GrantedAuthority> grantedAuths = (List<GrantedAuthority>)user.getAuthorities();
         
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, userPassword, grantedAuths);
         
