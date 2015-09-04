@@ -61,23 +61,9 @@ public class DataConfig {
 	 */
 	@Bean(destroyMethod = "shutdown")
 	public DataSource dataSource() {
-        logger.info("Start Check Data Config Properties --------------------");
-        logger.info("minimumIdle : " + minimumIdle);
-        logger.info("maximumPoolSize : " + maximumPoolSize);
-        logger.info("validationQuery : " + validationQuery);
-        logger.info("connectionTimeout : " + connectionTimeout);
-        logger.info("isAutoCommit : " + isAutoCommit);
-        logger.info("cachePrepStmts : " + cachePrepStmts);
-        logger.info("prepStmtCacheSize : " + prepStmtCacheSize);
-        logger.info("useServerPrepStmts : " + cachePrepStmts);
-        logger.info("dataUrl : " + dataUrl);
-        logger.info("user : " + user);
-        logger.info("password : " + password);
-        
-        logger.info("Start Check Data Config Properties --------------------");		
 		
         HikariConfig config = new HikariConfig();
-/*
+
         config.setMinimumIdle(minimumIdle);
         config.setMaximumPoolSize(maximumPoolSize);
         config.setConnectionTestQuery(validationQuery);
@@ -92,23 +78,7 @@ public class DataConfig {
         config.addDataSourceProperty("password", password);
         config.setDriverClassName(driverClassName);
         config.setJdbcUrl(dataUrl);
-*/
-        //if (minimumIdle == 0) {
-            config.setMinimumIdle(2);
-            config.setMaximumPoolSize(2);
-            config.setConnectionTestQuery("SELECT 1");
-            config.setConnectionTimeout(300000);
-            config.setAutoCommit(false);
 
-            config.addDataSourceProperty("cachePrepStmts", true);
-            config.addDataSourceProperty("prepStmtCacheSize", 250);
-            config.addDataSourceProperty("useServerPrepStmts", true);
-    		
-            config.addDataSourceProperty("user", "dbuser");
-            config.addDataSourceProperty("password", "dbuser1*");
-            config.setDriverClassName("net.sf.log4jdbc.DriverSpy");
-            config.setJdbcUrl("jdbc:log4jdbc:mysql://54.64.47.206/mykumidb");        	
-        //}
         
         return new HikariDataSource(config);		
    	}
