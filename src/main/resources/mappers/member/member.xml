@@ -2,21 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spay.module.member.dao.MemberDAO">
 
-	<typeAliases>
-	  <typeAlias alias="Member" type="com.spay.module.member.model.Member"/>
-	</typeAliases>
-    
-    <select id="selectMemberByName" parameterType="String" resultType="com.spay.module.member.model.Member">
-        SELECT * 
-        FROM users
-        WHERE username = #{name}
+    <select id="selectMember" 
+    		parameterType="String" 
+    		resultType="com.spay.module.member.model.MemberUserDetails">
+    	/* com.spay.module.member.dao.MemberDAO.selectMember by Woochul Jung */
+        SELECT	
+        		* 
+        FROM 	users
+        <where>
+		    <if test="no != 0">
+		         no = #{no}
+		    </if> 
+		    <if test="id != null">
+		        AND id = #{id}
+		    </if>
+        </where>
+    </select>  
+
+    <select id="selectMemberByNo" 
+    		parameterType="long" 
+    		resultType="com.spay.module.member.model.MemberUserDetails">
+    	/* com.spay.module.member.dao.MemberDAO.selectMemberByNo by Woochul Jung */
+        SELECT	
+        		* 
+        FROM 	users
+        WHERE 	no = #{no}
     </select>
     
-    <insert id="insertMember" parameterType="Member" useGeneratedKeys="true" keyProperty="sessionKey">
+    <select id="selectMemberById" 
+    		parameterType="String" 
+    		resultType="com.spay.module.member.model.MemberUserDetails">
+    	/* com.spay.module.member.dao.MemberDAO.selectMemberById by Woochul Jung */
+        SELECT	
+        		* 
+        FROM 	users
+        WHERE 	id = #{id}
+    </select>    
+    
+    <insert id="insertMember" 
+    		parameterType="com.spay.module.member.model.MemberUserDetails"
+    		useGeneratedKeys="true" 
+    		keyProperty="no">
+    	/* com.spay.module.member.dao.MemberDAO.insertMember by Woochul Jung */
         INSERT INTO users
-        VALUES ()
+        VALUES (
+        	null,
+        	#{id}, 
+        	#{password},
+        	#{name},
+        	#{status}
+       	)
     </insert>
     
+    <delete id="deleteMember" 
+    		parameterType="com.spay.module.member.model.MemberUserDetails">
+    	/* com.spay.module.member.dao.MemberDAO.deleteMember by Woochul Jung */
+        DELETE FROM users
+        <where>
+		    <if test="no != 0">
+		         no = #{no}
+		    </if> 
+		    <if test="id != null">
+		        AND id = #{id}
+		    </if>
+        </where>
+    </delete>    
     
 </mapper>
 

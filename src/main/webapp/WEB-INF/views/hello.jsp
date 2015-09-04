@@ -4,6 +4,7 @@
 <body>
 	<h1>Title : ${title}</h1>
 	<h1>Message : ${message}</h1>
+	<h1>Message : ${pageContext.request.userPrincipal }</h1>
 
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
 		<!-- For login user -->
