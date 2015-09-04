@@ -1,4 +1,4 @@
-package com.spay.member.model;
+package com.spay.module.member.model;
 
 import java.io.Serializable;
 import java.util.Collection;

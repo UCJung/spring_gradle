@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.spay.mapper.CategoryMapper;
+import com.spay.module.CategoryMapper;
 
 @Controller
 public class HomeController {

@@ -1,4 +1,4 @@
-package com.spay.member.bo;
+package com.spay.module.member.bo;
 
 import java.util.HashMap;
 
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.spay.exception.SPayException;
-import com.spay.member.dao.MemberDAO;
-import com.spay.member.model.Member;
+import com.spay.module.member.dao.MemberDAO;
+import com.spay.module.member.model.Member;
 import com.spay.utils.DateUtils;
 import com.spay.utils.enums.DatePatternEnum;
 

@@ -19,7 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.spay.member.bo.MemberBO;
+import com.spay.module.member.bo.MemberBO;
 
 public class SpayAuthenticationProvider extends DaoAuthenticationProvider {
 

@@ -1,4 +1,4 @@
-package com.spay.mapper;
+package com.spay.module;
 
 import org.springframework.stereotype.Service;
 

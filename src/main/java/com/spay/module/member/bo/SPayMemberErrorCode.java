@@ -1,4 +1,4 @@
-package com.spay.member.bo;
+package com.spay.module.member.bo;
 
 import com.spay.exception.ErrorCode;
 

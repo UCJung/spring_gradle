@@ -4,9 +4,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -21,8 +25,9 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
 @EnableWebMvc
-@Import({ SpringSecutiryConfig.class })
-@ComponentScan(basePackageClasses = AppConfig.class)
+@EnableAspectJAutoProxy
+@ComponentScan( 
+		basePackages={ "com.spay.module", "com.spay.web" } )
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
@@ -31,14 +36,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/css/*").addResourceLocations("/WEB-INF/css/*");
-        registry.addResourceHandler("/js/*").addResourceLocations("/WEB-INF/js/*");
-        registry.addResourceHandler("/img/*").addResourceLocations("/WEB-INF/img/*");        
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
     
     @Override
-    public void configureDefaultServletHandling(
-    		DefaultServletHandlerConfigurer configurer) {
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
     	configurer.enable();
     }
     

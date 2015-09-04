@@ -4,9 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * @author Inho Kang
- */
 public class PagerInfo {
 
     public static final String DEFAULT_PAGE_KEY = "page";

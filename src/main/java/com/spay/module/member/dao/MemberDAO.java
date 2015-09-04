@@ -1,11 +1,11 @@
-package com.spay.member.dao;
+package com.spay.module.member.dao;
 
 import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.spay.member.model.Member;
+import com.spay.module.member.model.Member;
 
 @Repository
 public interface MemberDAO {
