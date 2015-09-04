@@ -15,8 +15,8 @@ import com.spay.config.DataConfig;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
 		classes={ AppTestConfig.class, DataConfig.class })
 @Transactional
-public class BoTestBase {
+public class DBTestBase {
 	
-	protected final Logger logger = LoggerFactory.getLogger(BoTestBase.class);
+	protected final Logger logger = LoggerFactory.getLogger(DBTestBase.class);
 	
 }

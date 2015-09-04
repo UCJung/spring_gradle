@@ -25,7 +25,7 @@ public class MemberBO implements UserDetailsService {
     MemberDAO memberDAO;	
     
     public void addMember(Member member) {
-    	int result = memberDAO.insertMember(member);
+    	int result = memberDAO.addMember(member);
         if (result != 1) {
             throw new SPayException(SPayMemberErrorCode.MEMBER_ADD_FAIL);
         }    	

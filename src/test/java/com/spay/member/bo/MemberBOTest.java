@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.spay.module.member.bo.MemberBO;
-import com.spay.test.base.BoTestBase;
+import com.spay.test.base.DBTestBase;
 
-public class MemberBOTest extends BoTestBase {
+public class MemberBOTest extends DBTestBase {
 	
 	@Autowired
 	MemberBO memberBO;	

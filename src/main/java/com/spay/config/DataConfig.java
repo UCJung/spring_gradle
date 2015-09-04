@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -30,8 +31,7 @@ import com.zaxxer.hikari.HikariDataSource;
  */
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY, order = 0)
-@MapperScan({"com.spay.module"})
-@Import(PropertiesConfig.class)
+@MapperScan(basePackages = "com.spay.module", annotationClass = Repository.class )
 public class DataConfig {
 	static final Logger logger = LoggerFactory.getLogger(DataConfig.class);	
 	
