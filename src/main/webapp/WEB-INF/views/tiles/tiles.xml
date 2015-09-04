@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>   
+ 
+<definition name="defaultTemplate"  
+    template="/WEB-INF/views/tiles/layout/defaultLayout.jsp">   
+    <put-attribute name="title" value="" />        
+    <put-attribute name="header" value="/WEB-INF/views/tiles/layout/header.jsp" />   
+    <put-attribute name="menu" value="/WEB-INF/views/tiles/layout/menu.jsp" />      
+    <put-attribute name="body" value="" />       
+    <put-attribute name="footer" value="/WEB-INF/views/tiles/layout/footer.jsp" />   
+</definition>      
+ 
+ <!-- 컨트롤러에서 리턴해 주는 뷰이름,본예제는 hello  -->
+<definition name="tiles/*" extends="defaultTemplate">    
+    <put-attribute name="title" value="OracleJava Community, MVC HelloWorld by Tiles" />     
+    <put-attribute name="body" value="/WEB-INF/views/tiles/{1}.jsp" />    
+</definition>
+
+<definition name="tiles" extends="defaultTemplate">    
+    <put-attribute name="title" value="OracleJava Community, MVC HelloWorld by Tiles" />     
+    <put-attribute name="body" value="/WEB-INF/views/tiles/tiles.jsp" />    
+</definition>    
+ 
+</tiles-definitions>
+ 
