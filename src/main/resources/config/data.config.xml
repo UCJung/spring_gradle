@@ -11,8 +11,8 @@
     <!-- <entry key="">com.mysql.jdbc.Driver</entry> -->
     <entry key="datasource.driverClassName">net.sf.log4jdbc.DriverSpy</entry>
     <entry key="datasource.dataUrl">jdbc:log4jdbc:mysql://54.64.47.206/mykumidb</entry>
-    <entry key="datasource.user">dbuser</entry>
-    <entry key="datasource.password">dbuser1*</entry>
+    <entry key="datasource.user">ENC(ECbCP7hLblU7dhbHAbUalw==)</entry>
+    <entry key="datasource.password">ENC(VHak+j/XBFk8QdYMMzM6PvOrEHMMZMQU)</entry>
     <entry key="datasource.cachePrepStmts">true</entry>
     <entry key="datasource.prepStmtCacheSize">250</entry>
     <entry key="datasource.prepStmtCacheSqlLimit">2048</entry>

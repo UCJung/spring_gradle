@@ -71,6 +71,8 @@ public class DataConfig {
         logger.info("prepStmtCacheSize : " + prepStmtCacheSize);
         logger.info("useServerPrepStmts : " + cachePrepStmts);
         logger.info("dataUrl : " + dataUrl);
+        logger.info("user : " + user);
+        logger.info("password : " + password);
         
         logger.info("Start Check Data Config Properties --------------------");		
 		

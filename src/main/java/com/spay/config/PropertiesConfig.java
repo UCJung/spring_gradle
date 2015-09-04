@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
+import org.jasypt.spring3.properties.EncryptablePropertyPlaceholderConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +26,6 @@ public class PropertiesConfig {
         EnvironmentStringPBEConfig envConfig = new EnvironmentStringPBEConfig();
         envConfig.setAlgorithm("PBEWithMD5AndDES");
         envConfig.setPassword(SystemConstants.SPAY_ENC_KEY);
-        envConfig.setPassword("ECS_PROJECT_PRIVATE_KEY");
-
         return envConfig;
     }
 
@@ -37,28 +36,25 @@ public class PropertiesConfig {
 
         return standardPBEStringEncryptor;
     }
-
+    
     @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() throws IOException {
-    	
-    	PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-    	/*
+    public static EncryptablePropertyPlaceholderConfigurer encryptablePropertyPlaceholderConfigurer() throws IOException {
     	EncryptablePropertyPlaceholderConfigurer configurer = new EncryptablePropertyPlaceholderConfigurer(
-            configurationEncryptor());
-        */
+                configurationEncryptor());
+    	
         ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
-        Resource[] locations = patternResolver.getResources("classpath*:config/*.config.xml");
+        Resource[] locations = patternResolver.getResources("classpath*:config/*.config.xml");    
         
         logger.info("Resource Info ------------------------------------------");
         for (Resource resource : locations) {
         	logger.info(resource.getFilename());
 		}
-        logger.info("Resource Info ------------------------------------------");
+        logger.info("Resource Info ------------------------------------------");        
         
         configurer.setLocations(ResourceUtils.getDistinctResources(locations));
         configurer.setIgnoreUnresolvablePlaceholders(true);
         configurer.setIgnoreResourceNotFound(true);
-
+        
         return configurer;
     }
 
