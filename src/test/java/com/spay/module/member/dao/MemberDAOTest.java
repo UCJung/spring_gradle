@@ -21,6 +21,7 @@ public class MemberDAOTest extends DBTestBase {
 	
 	private Map<String, MemberUserDetails > members = new HashMap<>();
 	
+	// 테스트 계정 생성 정보
 	@Before
 	public void setupUser() {
 		MemberUserDetails member = new MemberUserDetails();
@@ -39,12 +40,14 @@ public class MemberDAOTest extends DBTestBase {
 		memberDAO.deleteMember(members.get("mykumi2"));
 	}
 	
+	// Member Table Insert Test
 	@Test
-	public void addUserTest() throws SPayException {
+	public void insertMemberTest() throws SPayException {
 		assertThat(memberDAO.insertMember(members.get("mykumi1")), is(1));
 		assertThat(memberDAO.insertMember(members.get("mykumi2")), is(1));
 	}
 	
+	// Member Table Delete Test
 	@Test
 	public void deleteUserTest() throws SPayException {
 		assertThat(memberDAO.insertMember(members.get("mykumi1")), is(1));
@@ -52,6 +55,12 @@ public class MemberDAOTest extends DBTestBase {
 		assertThat(memberDAO.deleteMember(members.get("mykumi1")), is(0));
 	}	
 	
+	/**
+	 * Member Table Select User Test
+	 * selectMemberById
+	 * selectMemberByNo
+	 * selectMember
+	 */
 	@Test
 	public void selectUserTest() throws SPayException {
 		memberDAO.insertMember(members.get("mykumi1"));

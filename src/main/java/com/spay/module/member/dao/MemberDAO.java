@@ -13,14 +13,13 @@ public interface MemberDAO {
 
 	int insertMember(MemberUserDetails member);
 	
+	MemberUserDetails selectMemberById(@Param("id") String id);
 	MemberUserDetails selectMemberByNo(@Param("no") long no);
+	MemberUserDetails selectMember(Member member);
 	
 	List<MemberUserDetails> getMembers();
 	
 	int deleteMember(MemberUserDetails member);
-
-	MemberUserDetails selectMemberById(@Param("id") String id);
-
-	MemberUserDetails selectMember(Member member);
+	int updateMember(MemberUserDetails member);
 
 }
